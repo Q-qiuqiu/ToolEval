@@ -6,17 +6,15 @@ from typing import Any, Dict, List, Optional
 
 import cv2
 from ultralytics import YOLO
-
 from fastmcp import FastMCP
 
 
-# ========== 配置 ==========
-MODELS_DIR = Path("/home/yzx/models_weight/YOLO/YOLOv8")  # 你的 .pt 文件目录（可改）
-SERVER_NAME = "YOLOv8 MCP Server"
 
+# ========== 配置 ==========
+MODELS_DIR = Path("/home/yzx/models_weight/YOLO/")  # 你的 .pt 文件目录（可改）
+SERVER_NAME = "YOLO MCP Server"
 
 mcp = FastMCP(SERVER_NAME)
-
 
 def _sanitize_tool_suffix(name: str) -> str:
     """
@@ -143,7 +141,7 @@ def register_all_models(models_dir: Path) -> None:
         suffix = _sanitize_tool_suffix(model_stem)
 
         tool_name = f"detect_{suffix}"
-        tool_desc = f"YOLOv8 detection using model '{model_stem}' loaded from {pt.name}"
+        tool_desc = f"YOLO detection using model '{model_stem}' loaded from {pt.name}"
 
         yolo = YOLO(str(pt))  # 加载模型
         fn = _make_detect_tool(model_stem, yolo)
